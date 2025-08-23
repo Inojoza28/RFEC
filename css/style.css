@@ -1,3 +1,13 @@
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes balancar {
+  0% { transform: scale(0.9) rotate(-10deg); } 
+  50% { transform: scale(1.1) rotate(10deg); }  
+  100% { transform: scale(1) rotate(0deg); }   
+}
+
+.animar-logo {
+  animation: balancar 1s ease-in-out forwards;
+}
