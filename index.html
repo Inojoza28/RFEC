@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="pt-br"> 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A RFEC é o ponto de encontro para desenvolvedores e entusiastas de front-end em Recife. Participe da comunidade, troque experiências e cresça profissionalmente.">
+  <meta name="keywords" content="RFEC, front-end, desenvolvedores, Recife, comunidade de tecnologia, programação, web development">
+  <meta name="author" content="Gabriel Inojoza">
+  <meta name="robots" content="index, follow">
+  <title>RFEC - Recife Front-End Community</title>
+  <link rel="icon" href="assets/imgs/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- 1. Carrega o Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 2. Configuração para o modo escuro -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Habilita a estratégia de classe para o modo escuro
+    }
+  </script>
+
+  <!-- 3. Carrega a biblioteca de ícones -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans transition-colors duration-300">
+
+  <!-- Header flutuante -->
+  <header class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 
+                 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg 
+                 px-6 py-3 rounded-full shadow-lg flex items-center gap-6">
+    <span class="font-bold text-blue-600 dark:text-blue-500"><a href="#">RFEC</a></span>
+    <nav class="flex gap-4 text-sm text-gray-600 dark:text-gray-300">
+      <a href="#links" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Links</a>
+      <a href="#sobre" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Sobre</a>
+      <a href="#entrar" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Entrar</a>
+    </nav>
+
+    <!-- Botão de Dark Mode -->
+    <button id="darkToggle" class="ml-auto flex items-center justify-center w-8 h-8 rounded-full  bg-gray-200 dark:bg-gray-700 hover:scale-105 transition">
+
+      <!-- Ícone da Lua (Visível no tema claro) -->
+      <i data-lucide="moon" class="moon-icon w-5 h-5 text-gray-700 dark:hidden"></i>
+
+      <!-- Ícone do Sol (Visível no tema escuro) -->
+      <i data-lucide="sun" class="sun-icon w-5 h-5 text-gray-200 hidden dark:inline"></i>
+    </button>
+  </header>
+
+  <!-- Hero com degradê e logo -->
+<section class="h-[75vh] sm:h-[65vh] flex flex-col items-center justify-center 
+                bg-gradient-to-b from-blue-500 via-blue-400 via-70% to-white dark:from-blue-800 dark:via-blue-900 dark:via-70% dark:to-gray-900 
+                rounded-b-3xl shadow-md text-white text-center transition-colors px-4">
+    <img src="assets/imgs/logo.png" alt="Logo RFEC" 
+       class="rounded-full border-4 border-white shadow-lg mb-4 w-28 sm:w-32 md:w-36">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+      RFEC - Recife Front-End Community
+    </h1>
+    <p class="mt-2 text-base sm:text-lg md:text-xl max-w-xs sm:max-w-md md:max-w-lg">
+      O ponto de encontro para desenvolvedores de front-end em Recife.
+    </p>
+  </section>
+
+
+  <!-- Seção de links -->
+  <section id="links" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 flex items-center gap-2">
+        <i data-lucide="link" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+        Links úteis
+    </h2>
+    
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v?mode=ems_copy_c&fbclid=PAZXh0bgNhZW0CMTEAAadxkR6uWoyyEqfTaBSNlVZ7s-M97yhGO69CxmmtzEh04nbUGFnpVvWwZeX_uQ_aem_mjvXgRiFZuGq7CHoD8Q0og" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="message-circle" class="w-6 h-6 text-green-600 dark:text-green-400 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">Grupo WhatsApp</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="https://discord.gg/JfBQp5NDQv" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="mic" class="w-6 h-6 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">Discord</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="https://www.instagram.com/rfecommunity?igsh=MXhiZGZsNG16ajQzMw%3D%3D&utm_source=qr" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="instagram" class="w-6 h-6 text-pink-600 dark:text-pink-400 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">Instagram</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="https://github.com/rfecommunity" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="github" class="w-6 h-6 text-gray-700 dark:text-gray-200 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">GitHub</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScB448FtraTWOltrEHnnVJ9Mq5R3oswJEKBvz2UArc4h8Sbcw/viewform" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="shopping-bag" class="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">Loja RFEC</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+
+        <a href="https://www.canva.com/design/DAFx7yw-7Qo/_avg0R8e_xtwLf9ZuxYsjQ/edit?utm_content=DAFx7yw-7Qo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank"
+            class="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow hover:shadow-xl transition flex items-center justify-between cursor-pointer">
+            <div class="flex items-center gap-4">
+                <i data-lucide="id-card" class="w-6 h-6 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition"></i>
+                <span class="font-medium text-gray-800 dark:text-gray-200">Crachá</span>
+            </div>
+            <i data-lucide="external-link" class="w-4 h-4 text-gray-400 group-hover:text-blue-500"></i>
+        </a>
+    </div>
+  </section>
+
+  <hr class="max-w-xs h-px mx-auto border-none bg-gradient-to-r from-transparent via-blue-400/60 dark:via-blue-500/50 to-transparent">
+
+  <!-- Sobre a comunidade -->
+  <section id="sobre" class="max-w-4xl mx-auto px-6 py-16 text-center">
+    <div class="flex items-center justify-center gap-3 mb-6">
+      <div class="w-10 h-10 bg-blue-500 dark:bg-blue-400 rounded-lg flex items-center justify-center">
+        <i data-lucide="users" class="w-5 h-5 text-white"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Sobre a RFEC</h2>
+    </div>
+    
+    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+      Conectando desenvolvedores front-end em Recife através da <strong>tecnologia</strong> e <strong>colaboração</strong>. 
+      Aqui criamos um ambiente onde todos podem aprender, compartilhar experiências e crescer juntos.
+    </p>
+
+    <!-- Objetivos em grid compacto -->
+    <div class="grid sm:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Aprendizado</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Tendências e tecnologias atualizadas
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="network" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Networking</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Conexões e oportunidades de carreira
+        </p>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="git-branch" class="w-6 h-6 text-white"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Colaboração</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300">
+          Projetos em equipe e hackathons
+        </p>
+      </div>
+    </div>
+
+    <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full">
+      <i data-lucide="rocket" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+      <span class="text-blue-600 dark:text-blue-400 text-sm font-medium">
+        Junte-se e ajude a construir uma comunidade vibrante!
+      </span>
+    </div>
+  </section>
+
+  <hr class="max-w-xs h-px mx-auto border-none bg-gradient-to-r from-transparent via-blue-400/60 dark:via-blue-500/50 to-transparent">
+
+  <!-- Parceria -->
+   <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+      
+      <!-- Header da parceria -->
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold mb-1 text-gray-900 dark:text-gray-100">Parceria com a FIAP</h2>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">Oportunidades exclusivas de capacitação</p>
+        </div>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="grid md:grid-cols-2 gap-6 items-center">
+        <div>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Nossa parceria com a <strong>FIAP</strong> oferece <strong>bolsas de descontos</strong> 
+            em graduações e pós-graduações para membros da comunidade.
+          </p>
+          
+          <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400">
+            <i data-lucide="message-square" class="w-4 h-4"></i>
+            <span class="text-sm font-medium">Entre em contato com os ADMs do grupo do WhatsApp</span>
+          </div>
+        </div>
+
+        <!-- Benefits compacto -->
+        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
+          <h3 class="font-semibold mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+            <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i>
+            <span class="text-sm">Benefícios</span>
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+              Descontos em graduações
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+              Descontos em pós-graduações
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+              Suporte da comunidade
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section id="entrar" class="bg-gradient-to-b from-blue-500 to-blue-400 dark:from-blue-900 dark:to-slate-800 text-white py-12 px-4 sm:py-16 text-center">
+    <h2 class="text-xl sm:text-2xl font-bold mb-4">Junte-se à RFEC ✨</h2>
+    <p class="mb-6 text-sm sm:text-base">
+      Entre no nosso grupo e faça parte dessa rede incrível de apaixonados por tecnologia.
+    </p>
+    <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v?mode=ems_copy_c&fbclid=PAZXh0bgNhZW0CMTEAAadxkR6uWoyyEqfTaBSNlVZ7s-M97yhGO69CxmmtzEh04nbUGFnpVvWwZeX_uQ_aem_mjvXgRiFZuGq7CHoD8Q0og" target="_blank" 
+       class="inline-block bg-white text-blue-600 px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold shadow hover:scale-105 transition">
+      Entrar no WhatsApp
+    </a>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
