@@ -35,6 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error("Botão de toggle do tema (darkToggle) não encontrado.");
   }
 
+    // --- Atalho de teclado (Alt + T) ---
+  document.addEventListener('keydown', (event) => {
+    if (event.altKey && event.key.toLowerCase() === 't') {
+      event.preventDefault(); // evita conflitos com atalhos do navegador
+      toggleTheme();
+    }
+  });
+
   // Verifica se há um tema salvo no localStorage
   const savedTheme = localStorage.getItem('theme');
 
