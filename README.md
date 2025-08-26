@@ -53,18 +53,18 @@ O projeto segue uma estrutura clara e organizada para facilitar a manutenção:
 |   |-- 📂 imgs/
 |   |   |-- logo.png
 |   |-- 📂 songs/
-|       |-- celebration.mp3
+|   |   |-- celebration.mp3
 |
 |-- 📂 css/
-|   |-- style.css
-|   |-- cracha.css       
+|   |-- cracha.css
+|   |-- style.css       
 |
 |-- 📂 js/
-|   |-- main.js
 |   |-- cracha.js
+|   |-- main.js
 |
-|-- index.html
-|-- cracha.html         
+|-- cracha.html
+|-- index.html         
 |-- README.md           
 ```
 
