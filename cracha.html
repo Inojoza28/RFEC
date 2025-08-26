@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crachá RFEC</title>
+    <link rel="icon" href="assets/imgs/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cracha.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans transition-colors duration-300">
+
+    <header class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 
+                   bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg 
+                   px-6 py-3 rounded-full shadow-lg flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            <span class="text-sm font-semibold hidden sm:inline">Voltar</span>
+        </a>
+        <span class="font-bold text-[#3e69a6] dark:text-[#5a8ccf]"><a href="index.html">RFEC</a></span>
+        <nav class="flex gap-4 text-sm text-gray-600 dark:text-gray-300">
+            <a href="index.html#links" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Links</a>
+            <a href="index.html#sobre" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Sobre</a>
+            <a href="index.html#participar" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Participar</a>
+        </nav>
+        <button id="darkToggle" class="ml-auto flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-105 transition">
+            <i data-lucide="moon" class="moon-icon w-5 h-5 text-gray-700 dark:hidden"></i>
+            <i data-lucide="sun" class="sun-icon w-5 h-5 text-gray-200 hidden dark:inline"></i>
+        </button>
+    </header>
+
+    <main class="min-h-screen pt-32 pb-16 flex flex-col items-center px-4 md:flex-row md:items-start md:justify-center md:gap-12">
+        
+        <div class="w-full max-w-sm flex flex-col items-center mb-8 md:mb-0">
+           <div id="cracha-container" 
+                 class="relative w-[360px] h-[570px] perspectiva-3d mb-8">
+
+                <!-- Frente -->
+                <div id="cracha-frente" 
+                     class="absolute w-full h-full verso-oculto rounded-2xl overflow-hidden 
+                            bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 
+                            text-gray-900 dark:text-gray-100 shadow-2xl border border-gray-200 dark:border-gray-700 transicao-cracha">
+                    
+                    <!-- detalhe do suporte -->
+                    <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-2 bg-gray-300 rounded-full"></div>
+                    
+                    <!-- Topo com logo + nome -->
+                    <div class="bg-gradient-to-r from-[#1e2f45] to-[#143771] flex items-center justify-center gap-3 p-6 text-white shadow-md">
+
+                        <img src="assets/imgs/logo-verso.png" alt="Logo RFEC Personalizada" 
+                            class="w-48 h-auto drop-shadow-md relative top-1"> 
+                    </div>
+
+                    <!-- Corpo -->
+                    <div class="flex flex-col items-center justify-center p-6 flex-1 relative z-10">
+                        <div id="foto-preview" 
+                             class="relative w-36 h-36 rounded-full border-4 border-[#3e69a6] shadow-xl mb-6 overflow-hidden bg-gray-200 flex items-center justify-center">
+                            <div class="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl"></div>
+                            <i data-lucide="user" class="w-14 h-14 text-gray-500 relative z-10"></i>
+                        </div>
+
+                        <p id="nome-cracha" class="text-3xl font-extrabold text-center tracking-wide">Seu Nome</p>
+                        <span class="mt-2 text-sm text-gray-600 dark:text-gray-400 italic">Membro oficial</span>
+                        
+                        <!-- QR Code ou Logo opcional -->
+                        <div id="social-qr-container" class="mt-5 w-20 h-20 flex items-center justify-center">
+                            <img id="social-qr" src="assets/imgs/logo.png" alt="QR Code ou Logo" 
+                                 class="w-20 h-20 object-contain rounded-xl bg-blue-100 p-2 shadow-md">
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Verso -->
+                <div id="cracha-verso" 
+                     class="absolute w-full h-full verso-visivel rounded-2xl flex flex-col items-center justify-center 
+                            bg-gradient-to-b from-[#143771] to-[#0f2a52] text-white shadow-2xl border border-gray-800 transicao-cracha p-8">
+
+                    <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-2 bg-gray-400 rounded-full"></div>
+                    
+                    <!-- Imagem personalizada do verso -->
+                    <img src="assets/imgs/logo-verso.png" alt="Cabeçalho personalizado do verso" 
+                         class="w-40 h-auto mb-6 -mt-6">
+
+                    <!-- Chamada para ação -->
+                    <p class="text-lg font-semibold text-blue-300 mb-3">Entre na RFEC</p>
+                    
+                    <!-- QR code -->
+                    <img src="assets/imgs/QRCode.png" alt="QR Code" 
+                         class="w-48 h-48 shadow-md rounded-lg bg-white p-3 mb-4">
+                    
+                    <!-- Texto + logo pequena -->
+                    <div class="flex flex-col items-center gap-2">
+                        <p class="text-xs text-center text-gray-300">
+                            Escaneie e faça parte da nossa comunidade.
+                        </p>
+                        <img src="assets/imgs/logo.png" alt="Mini Logo RFEC" 
+                             class="w-8 h-8 opacity-80">
+                    </div>
+                </div>
+
+            </div>
+            
+            <div id="cracha-help" class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-2 animacao-piscar">
+                <i data-lucide="mouse-pointer" class="w-4 h-4"></i>
+                <span>Clique no crachá para virar</span>
+            </div>
+        </div>
+
+        <div class="w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Personalize seu crachá</h2>
+            
+            <form id="form-cracha" class="space-y-4">
+                <div>
+                    <label for="nome" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Seu Nome</label>
+                    <input type="text" id="nome" placeholder="Ex: Maria da Silva" required
+                           class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="foto" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Sua Foto (opcional)</label>
+                    <input type="file" id="foto" accept="image/*"
+                           class="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/40 dark:file:text-blue-300">
+                </div>
+                <div>
+                    <label for="social-qr-input" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                        QR Code da sua rede social (opcional)
+                    </label>
+                    <input type="file" id="social-qr-input" accept="image/*" 
+                           class="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-900/40 dark:file:text-blue-300">
+                </div>
+
+                <button type="submit" class="w-full flex items-center justify-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+                    <i data-lucide="save" class="w-5 h-5 mr-2"></i>
+                    Salvar
+                </button>
+            </form>
+            
+            <hr class="my-6 border-gray-200 dark:border-gray-700">
+            
+            <div class="space-y-4">
+                <button id="baixar-frente" class="w-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                    Baixar Frente
+                </button>
+                <button id="baixar-verso" class="w-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                    Baixar Verso
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full text-center p-4 mt-8">
+        <p class="text-sm text-gray-400 dark:text-gray-500">
+            &copy; 2025 RFEC - Recife Front-End Community.
+        </p>
+    </footer>
+
+    <!-- Modal de Sucesso Melhorado -->
+    <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
+        
+        <!-- Card do Modal com Animação de Entrada -->
+        <div id="modal-card" class="bg-white dark:bg-gray-800 w-full max-w-md p-8 rounded-2xl shadow-2xl text-center border border-gray-200 dark:border-gray-700 transform scale-95 opacity-0 transition-all duration-300">
+
+            <!-- Ícone com Gradiente -->
+            <div class="w-20 h-20 rounded-full bg-[#2b84fa]
+                flex items-center justify-center mx-auto mb-5 shadow-lg shadow-blue-500/40">
+        
+                <img src="assets/imgs/logo.png" alt="Logo RFEC" class="w-12 h-12">
+
+            </div>
+            
+            <!-- Tipografia Melhorada -->
+            <h3 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">Parabéns!</h3>
+            <p class="text-gray-500 dark:text-gray-400 mb-8 text-lg">
+                Seu crachá está pronto. Bem-vindo(a) à comunidade RFEC!
+            </p>
+            
+            <!-- Botão Melhorado -->
+            <button id="close-modal" class="w-full px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-300 transform hover:scale-105">
+                Ok, entendi!
+            </button>
+        </div>
+    </div>
+
+
+    <audio id="feedback-audio" src="assets/songs/celebration.mp3" preload="auto"></audio>
+
+    <script src="js/main.js"></script>
+    <script src="js/cracha.js"></script>
+</body>
+</html>
