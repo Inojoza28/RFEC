@@ -45,7 +45,9 @@
         </button>
     </header>
 
-        <section class="w-full pt-32 pb-12 bg-transparent">
+        <section class="w-full pt-32 pb-12 
+             bg-gray-100/50 dark:bg-gray-800/40 
+             border-b border-gray-200 dark:border-gray-800">
             <div class="container mx-auto px-6 text-center">
             
             <!-- Título Principal -->
@@ -63,11 +65,9 @@
                     <!-- Linha Conectora (visível apenas em desktop) -->
                     <div class="hidden md:block absolute top-6 left-0 w-full h-px bg-gray-200 dark:bg-gray-700"></div>
                     
-                    <!-- Linha Conectora Vertical (visível apenas em mobile) -->
-                    <div class="md:hidden absolute top-6 left-1/2 w-px h-[calc(100%-48px)] bg-gray-200 dark:bg-gray-700 -translate-x-1/2"></div>
 
                     <!-- Passo 1 -->
-                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-gray-50 dark:bg-gray-900 px-2">
+                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-transparent px-2">
                         <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-blue-500 rounded-full shadow-md">
                             <i data-lucide="edit-3" class="w-6 h-6 text-blue-500"></i>
                         </div>
@@ -78,7 +78,7 @@
                     </div>
 
                     <!-- Passo 2 -->
-                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-gray-50 dark:bg-gray-900 px-2">
+                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-transparent px-2">
                         <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-full shadow-md">
                             <i data-lucide="save" class="w-6 h-6 text-gray-500"></i>
                         </div>
@@ -89,7 +89,7 @@
                     </div>
 
                     <!-- Passo 3 -->
-                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-gray-50 dark:bg-gray-900 px-2">
+                    <div class="relative z-10 flex flex-row md:flex-col items-center w-full md:w-auto gap-4 md:gap-0 bg-transparent px-2">
                         <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 rounded-full shadow-md">
                             <i data-lucide="download" class="w-6 h-6 text-gray-500"></i>
                         </div>
@@ -150,7 +150,7 @@
 
                         
                         <!-- QR Code ou Logo opcional -->
-                        <div id="social-qr-container" class="mt-5 w-20 h-20 flex items-center justify-center">
+                        <div id="social-qr-container" class="mt-5 w-24 h-24 flex items-center justify-center">
                             <img id="social-qr" src="assets/imgs/logo.png" alt="QR Code ou Logo" 
                                  class="w-20 h-20 object-contain rounded-xl bg-blue-100 p-2 shadow-md">
                         </div>
