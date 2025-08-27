@@ -48,3 +48,14 @@ html {
 .animar-logo-fadeInUp {
   animation: fadeInSlideUp 1s ease-out forwards;
 }
+
+ /*Lógica das logos de parceria*/
+  @keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-slide {
+    display: flex;
+    width: max-content;
+    animation: slide 30s linear infinite;
+  }
