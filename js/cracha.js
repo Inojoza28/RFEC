@@ -18,8 +18,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const socialQrInput = document.getElementById('social-qr-input');
     const socialQr = document.getElementById('social-qr');
     const socialQrContainer = document.getElementById('social-qr-container');
-
+    const excluirFotoBtn = document.getElementById('excluir-foto');
+    const excluirQrBtn = document.getElementById('excluir-qr');
+    
     let isFrente = true; // Estado de rotação
+
+
+    // ================================================================
+    // Funções para redefinir as imagens
+    // ================================================================
+    function resetarFoto() {
+        // Remove do localStorage
+        localStorage.removeItem('fotoUsuario');
+        
+        // Reseta o preview para o ícone padrão
+        fotoPreview.innerHTML = `<div class="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl"></div><i data-lucide="user" class="w-14 h-14 text-gray-500 relative z-10"></i>`;
+        lucide.createIcons(); // Recria o ícone
+        
+        // Limpa o valor do input de arquivo
+        fotoInput.value = '';
+    }
+
+    function resetarQrCode() {
+    // Remove do localStorage
+    localStorage.removeItem('socialQr');
+    
+    // Reseta a imagem para o logo padrão
+    socialQr.src = "assets/imgs/logo.png";
+    
+    socialQr.className = "w-16 h-16 object-contain"; // Estilo do logo dentro do círculo
+    socialQrContainer.className = "mt-4 w-20 h-20 flex items-center justify-center rounded-full bg-blue-600 p-3 shadow-lg"; // Estilo do container com fundo azul
+    
+    // Limpa o valor do input de arquivo
+    socialQrInput.value = '';
+}
 
     // ================================================================
     // Função para redimensionar imagem mantendo qualidade (formato circular)
@@ -65,32 +97,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar dados do localStorage
     // ================================================================
     function carregarDados() {
-        const nomeSalvo = localStorage.getItem('nomeUsuario');
-        const fotoSalva = localStorage.getItem('fotoUsuario');
-        const socialQrSalvo = localStorage.getItem('socialQr');
+    const nomeSalvo = localStorage.getItem('nomeUsuario');
+    const fotoSalva = localStorage.getItem('fotoUsuario');
+    const socialQrSalvo = localStorage.getItem('socialQr');
 
-        if (nomeSalvo) {
-            nomeInput.value = nomeSalvo;
-            nomeCracha.textContent = nomeSalvo;
-        }
-
-        if (fotoSalva) {
-            fotoPreview.innerHTML = `<img src="${fotoSalva}" alt="Foto do usuário" class="w-full h-full object-cover rounded-full" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; aspect-ratio: 1/1;">`;
-        } else {
-            fotoPreview.innerHTML = `<i data-lucide="user" class="w-12 h-12 text-gray-500"></i>`;
-            lucide.createIcons();
-        }
-
-        if (socialQrSalvo) {
-            socialQr.src = socialQrSalvo;
-            socialQr.className = "w-24 h-24 object-contain"; // QR maior
-            socialQrContainer.className = "mt-4 w-24 h-24 flex items-center justify-center"; 
-        } else {
-            socialQr.src = "assets/imgs/logo.png";
-            socialQr.className = "w-16 h-16 object-contain";
-            socialQrContainer.className = "mt-4 w-20 h-20 flex items-center justify-center rounded-full bg-blue-600 p-3 shadow-lg";
-        }
+    if (nomeSalvo) {
+        nomeInput.value = nomeSalvo;
+        nomeCracha.textContent = nomeSalvo;
     }
+
+    // Lógica da Foto de Perfil
+    if (fotoSalva) {
+        fotoPreview.innerHTML = `<img src="${fotoSalva}" alt="Foto do usuário" class="w-full h-full object-cover rounded-full" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; aspect-ratio: 1/1;">`;
+    } else {
+        // Se não houver foto salva, chama a função de reset da FOTO.
+        resetarFoto(); 
+    }
+
+    // Lógica do QR Code
+    if (socialQrSalvo) {
+        socialQr.src = socialQrSalvo;
+        socialQr.className = "w-24 h-24 object-contain"; // QR maior
+        socialQrContainer.className = "mt-4 w-24 h-24 flex items-center justify-center"; 
+    } else {
+        // Se não houver QR salvo, chama a função de reset do QR CODE.
+        resetarQrCode(); 
+    }
+}
+    // ================================================================
+    // EVENTOS PARA OS BOTÕES DE EXCLUSÃO
+    // ================================================================
+    excluirFotoBtn.addEventListener('click', () => {
+        resetarFoto();
+    });
+
+    excluirQrBtn.addEventListener('click', () => {
+        resetarQrCode();
+    });
 
     // ================================================================
     // Função para salvar dados
