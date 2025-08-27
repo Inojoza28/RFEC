@@ -22,6 +22,46 @@ document.addEventListener('DOMContentLoaded', () => {
     let isFrente = true; // Estado de rotação
 
     // ================================================================
+    // Função para redimensionar imagem mantendo qualidade (formato circular)
+    // ================================================================
+    function redimensionarImagem(file, targetSize, quality = 0.9) {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = () => {
+                const { width, height } = img;
+                
+                // Define o canvas como quadrado para evitar achatamento
+                canvas.width = targetSize;
+                canvas.height = targetSize;
+                
+                // Melhora a qualidade da renderização
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                
+                // Calcula o crop para manter proporção quadrada (center crop)
+                const size = Math.min(width, height);
+                const offsetX = (width - size) / 2;
+                const offsetY = (height - size) / 2;
+                
+                // Desenha a imagem cortada em formato quadrado
+                ctx.drawImage(
+                    img,
+                    offsetX, offsetY, size, size,  // área de origem (crop quadrado)
+                    0, 0, targetSize, targetSize   // área de destino (quadrado)
+                );
+                
+                // Converte para base64 com qualidade alta
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            };
+            
+            img.src = URL.createObjectURL(file);
+        });
+    }
+
+    // ================================================================
     // Função para carregar dados do localStorage
     // ================================================================
     function carregarDados() {
@@ -35,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (fotoSalva) {
-            fotoPreview.innerHTML = `<img src="${fotoSalva}" alt="Foto do usuário" class="w-full h-full object-cover">`;
+            fotoPreview.innerHTML = `<img src="${fotoSalva}" alt="Foto do usuário" class="w-full h-full object-cover rounded-full" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; aspect-ratio: 1/1;">`;
         } else {
             fotoPreview.innerHTML = `<i data-lucide="user" class="w-12 h-12 text-gray-500"></i>`;
             lucide.createIcons();
@@ -72,20 +112,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // ================================================================
     // SUBMISSÃO DO FORMULÁRIO
     // ================================================================
-    formCracha.addEventListener('submit', (e) => {
+    formCracha.addEventListener('submit', async (e) => {
         e.preventDefault();
         const nome = nomeInput.value.trim();
         const arquivoFoto = fotoInput.files[0];
 
         if (arquivoFoto) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const fotoDataUrl = event.target.result;
-                salvarDados(nome, fotoDataUrl);
+            try {
+                // Redimensiona a imagem mantendo alta qualidade (formato quadrado)
+                const fotoOtimizada = await redimensionarImagem(arquivoFoto, 600, 0.95);
+                salvarDados(nome, fotoOtimizada);
                 carregarDados();
                 exibirFeedback();
-            };
-            reader.readAsDataURL(arquivoFoto);
+            } catch (error) {
+                console.error('Erro ao processar imagem:', error);
+                // Fallback para o método original
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    salvarDados(nome, event.target.result);
+                    carregarDados();
+                    exibirFeedback();
+                };
+                reader.readAsDataURL(arquivoFoto);
+            }
         } else {
             salvarDados(nome);
             carregarDados();
@@ -100,14 +149,22 @@ document.addEventListener('DOMContentLoaded', () => {
         nomeCracha.textContent = e.target.value.trim() || 'Seu Nome';
     });
 
-    fotoInput.addEventListener('change', (e) => {
+    fotoInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                fotoPreview.innerHTML = `<img src="${ev.target.result}" alt="Foto do usuário" class="w-full h-full object-cover">`;
-            };
-            reader.readAsDataURL(file);
+            try {
+                // Pré-visualização também com qualidade otimizada
+                const fotoOtimizada = await redimensionarImagem(file, 400, 400, 0.9);
+                fotoPreview.innerHTML = `<img src="${fotoOtimizada}" alt="Foto do usuário" class="w-full h-full object-cover" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">`;
+            } catch (error) {
+                console.error('Erro ao processar preview:', error);
+                // Fallback para método original
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    fotoPreview.innerHTML = `<img src="${ev.target.result}" alt="Foto do usuário" class="w-full h-full object-cover" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">`;
+                };
+                reader.readAsDataURL(file);
+            }
         } else {
             fotoPreview.innerHTML = `<i data-lucide="user" class="w-12 h-12 text-gray-500"></i>`;
             lucide.createIcons();
@@ -121,26 +178,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function exibirFeedback() {
-    if (feedbackAudio) feedbackAudio.play();
+        if (feedbackAudio) feedbackAudio.play();
 
-    // 1. Dispara os confetes!
-    confetti({
-        particleCount: 100, 
-        spread: 70,         
-        origin: { y: 0.6 }  
-    });
+        // 1. Dispara os confetes!
+        confetti({
+            particleCount: 100, 
+            spread: 70,         
+            origin: { y: 0.6 }  
+        });
 
-    // 2. Torna o fundo do modal visível
-    successModal.classList.remove('opacity-0', 'invisible');
+        // 2. Torna o fundo do modal visível
+        successModal.classList.remove('opacity-0', 'invisible');
 
-    // 3. Anima o card para o estado visível
-    setTimeout(() => {
-        modalCard.classList.remove('scale-95', 'opacity-0');
-    }, 50);
-}
+        // 3. Anima o card para o estado visível
+        setTimeout(() => {
+            modalCard.classList.remove('scale-95', 'opacity-0');
+        }, 50);
+    }
 
     function fecharModal() {
-
         modalCard.classList.add('scale-95', 'opacity-0');
 
         setTimeout(() => {
@@ -171,15 +227,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            // Configurações otimizadas para html2canvas
             const canvas = await html2canvas(element, {
                 useCORS: true,
                 backgroundColor: null,
-                scale: 2
+                scale: 3, // Aumentado para melhor qualidade
+                width: element.offsetWidth,
+                height: element.offsetHeight,
+                scrollX: 0,
+                scrollY: 0,
+                allowTaint: true,
+                imageTimeout: 0,
+                logging: false,
+                onclone: (clonedDoc) => {
+                    // Garante que as imagens no clone tenham boa qualidade
+                    const imgs = clonedDoc.querySelectorAll('img');
+                    imgs.forEach(img => {
+                        img.style.imageRendering = '-webkit-optimize-contrast';
+                        img.style.imageRendering = 'crisp-edges';
+                    });
+                }
             });
+
+            // Cria um novo canvas com melhor compressão
+            const finalCanvas = document.createElement('canvas');
+            const ctx = finalCanvas.getContext('2d');
+            
+            finalCanvas.width = canvas.width;
+            finalCanvas.height = canvas.height;
+            
+            // Configurações para melhor qualidade
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
+            // Desenha o canvas original no final
+            ctx.drawImage(canvas, 0, 0);
+            
             const link = document.createElement('a');
-            link.href = canvas.toDataURL('image/png');
+            link.href = finalCanvas.toDataURL('image/png', 1.0); // Qualidade máxima
             link.download = filename;
             link.click();
+            
         } catch (error) {
             console.error("Erro ao baixar crachá:", error);
         } finally {
@@ -199,18 +287,28 @@ document.addEventListener('DOMContentLoaded', () => {
         baixarCracha(crachaVerso, 'cracha-verso-rfec.png');
     });
 
-    socialQrInput.addEventListener('change', (e) => {
+    socialQrInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const qrDataUrl = event.target.result;
-                socialQr.src = qrDataUrl;
+            try {
+                const qrOtimizado = await redimensionarImagem(file, 300, 300, 0.95);
+                socialQr.src = qrOtimizado;
                 socialQr.className = "w-24 h-24 object-contain";
                 socialQrContainer.className = "mt-4 w-24 h-24 flex items-center justify-center";
-                salvarDados(nomeInput.value.trim(), null, qrDataUrl);
-            };
-            reader.readAsDataURL(file);
+                salvarDados(nomeInput.value.trim(), null, qrOtimizado);
+            } catch (error) {
+                console.error('Erro ao processar QR:', error);
+                // Fallback
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const qrDataUrl = event.target.result;
+                    socialQr.src = qrDataUrl;
+                    socialQr.className = "w-24 h-24 object-contain";
+                    socialQrContainer.className = "mt-4 w-24 h-24 flex items-center justify-center";
+                    salvarDados(nomeInput.value.trim(), null, qrDataUrl);
+                };
+                reader.readAsDataURL(file);
+            }
         } else {
             socialQr.src = "assets/imgs/logo.png";
             socialQr.className = "w-16 h-16 object-contain";

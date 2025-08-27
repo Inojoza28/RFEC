@@ -20,24 +20,28 @@
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 font-sans transition-colors duration-300">
 
-    <header class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 
-                   bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg 
-                   px-6 py-3 rounded-full shadow-lg flex items-center gap-6">
+    <header class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50
+               bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg
+               px-6 py-3 rounded-full shadow-lg flex items-center justify-between w-[320px] sm:w-[400px]">
+
+        <!-- Botão voltar -->
         <a href="index.html" class="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition">
             <i data-lucide="arrow-left" class="w-5 h-5"></i>
             <span class="text-sm font-semibold hidden sm:inline">Voltar</span>
         </a>
-        <span class="font-bold text-[#3e69a6] dark:text-[#5a8ccf]"><a href="index.html">RFEC</a></span>
-        <nav class="flex gap-4 text-sm text-gray-600 dark:text-gray-300">
-            <a href="index.html#links" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Links</a>
-            <a href="index.html#sobre" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Sobre</a>
-            <a href="index.html#participar" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Participar</a>
-        </nav>
-        <button id="darkToggle" class="ml-auto flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-105 transition">
+
+        <!-- Nome centralizado -->
+        <span class="absolute left-1/2 transform -translate-x-1/2 font-bold text-[#3e69a6] dark:text-[#5a8ccf]">
+            <a href="index.html">RFEC</a>
+        </span>
+
+        <!-- Toggle dark mode -->
+        <button id="darkToggle" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-105 transition">
             <i data-lucide="moon" class="moon-icon w-5 h-5 text-gray-700 dark:hidden"></i>
             <i data-lucide="sun" class="sun-icon w-5 h-5 text-gray-200 hidden dark:inline"></i>
         </button>
     </header>
+
 
     <main class="min-h-screen pt-32 pb-16 flex flex-col items-center px-4 md:flex-row md:items-start md:justify-center md:gap-12">
         
@@ -47,9 +51,10 @@
 
                 <!-- Frente -->
                 <div id="cracha-frente" 
-                     class="absolute w-full h-full verso-oculto rounded-2xl overflow-hidden 
-                            bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 
-                            text-gray-900 dark:text-gray-100 shadow-2xl border border-gray-200 dark:border-gray-700 transicao-cracha">
+                class="absolute w-full h-full verso-oculto rounded-2xl overflow-hidden 
+                        bg-[#f0f4f8] dark:bg-[#1e293b]
+                        text-gray-900 dark:text-gray-100 shadow-2xl border border-gray-200 dark:border-gray-700 transicao-cracha">
+
                     
                     <!-- detalhe do suporte -->
                     <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-2 bg-gray-300 rounded-full"></div>
@@ -62,7 +67,8 @@
                     </div>
 
                     <!-- Corpo -->
-                    <div class="flex flex-col items-center justify-center p-6 flex-1 relative z-10">
+                    <div class="flex flex-col items-center justify-center py-12 px-6 flex-1 relative z-10">
+
                         <div id="foto-preview" 
                              class="relative w-36 h-36 rounded-full border-4 border-[#3e69a6] shadow-xl mb-6 overflow-hidden bg-gray-200 flex items-center justify-center">
                             <div class="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl"></div>
