@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file) {
             try {
                 // Pré-visualização também com qualidade otimizada
-                const fotoOtimizada = await redimensionarImagem(file, 400, 400, 0.9);
+                const fotoOtimizada = await redimensionarImagem(file, 400, 0.9);
                 fotoPreview.innerHTML = `<img src="${fotoOtimizada}" alt="Foto do usuário" class="w-full h-full object-cover" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;">`;
             } catch (error) {
                 console.error('Erro ao processar preview:', error);
@@ -303,13 +303,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 imageTimeout: 0,
                 logging: false,
                 onclone: (clonedDoc) => {
-                    // Garante que as imagens no clone tenham boa qualidade
-                    const imgs = clonedDoc.querySelectorAll('img');
-                    imgs.forEach(img => {
-                        img.style.imageRendering = '-webkit-optimize-contrast';
-                        img.style.imageRendering = 'crisp-edges';
-                    });
+                // 1) Força boa renderização das imagens no clone
+                const imgs = clonedDoc.querySelectorAll('img');
+                imgs.forEach(img => {
+                    img.style.imageRendering = '-webkit-optimize-contrast';
+                    img.style.imageRendering = 'crisp-edges';
+                });
+
+                // 2) Adiciona classe "apertada" só no clone
+                const frenteClonada = clonedDoc.getElementById('cracha-frente');
+                if (frenteClonada) frenteClonada.classList.add('export-tight');
+
+                // 3) Injeta CSS que vale apenas no clone durante a exportação
+                const style = clonedDoc.createElement('style');
+                style.textContent = `
+                #cracha-frente.export-tight #foto-preview {
+                    margin-bottom: 0.75rem !important;
                 }
+                #cracha-frente.export-tight #nome-cracha {
+                    margin-top: 0 !important;
+                    line-height: 1.1 !important;
+                }
+                /* Aqui aumentamos mais a distância do nome para o "Membro Oficial" */
+                #cracha-frente.export-tight #membro-status {
+                    margin-top: 1.25rem !important; /* antes era 0.75rem */
+                }
+                #cracha-frente.export-tight #social-qr-container {
+                    margin-top: 1.5rem !important;
+                }
+                `;
+                clonedDoc.head.appendChild(style);
+                }
+
             });
 
             // Cria um novo canvas com melhor compressão
@@ -354,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const file = e.target.files[0];
         if (file) {
             try {
-                const qrOtimizado = await redimensionarImagem(file, 300, 300, 0.95);
+                const qrOtimizado = await redimensionarImagem(file, 300, 0.95);
                 socialQr.src = qrOtimizado;
                 socialQr.className = "w-24 h-24 object-contain";
                 socialQrContainer.className = "mt-4 w-24 h-24 flex items-center justify-center";
