@@ -211,7 +211,7 @@
             <form id="form-cracha" class="space-y-4">
                 <div>
                     <label for="nome" class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">Seu Nome</label>
-                    <input type="text" id="nome" placeholder="Ex: Larisssa Albuquerque" required
+                    <input type="text" id="nome" placeholder="Ex: Larissa Albuquerque" required
                            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
@@ -260,35 +260,39 @@
         </div>
     </main>
 
-    <footer class="w-full bg-[#3e69a6] dark:bg-[#2a4d7f] text-white py-6 mt-12 rounded-t-lg shadow-inner">
-    <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        
-        <!-- Voltar ao topo -->
-        <a href="#top" class="flex items-center gap-2 font-semibold hover:text-yellow-300 transition">
-        <i data-lucide="arrow-up" class="w-4 h-4"></i>
-        Voltar ao topo
-        </a>
+    <footer class="mt-20 rounded-t-xl bg-[#3e69a6] dark:bg-[#2a4d7f] shadow-inner">
+    <div class="max-w-5xl mx-auto px-6 py-8 text-center">
 
-        <!-- Redes sociais -->
-        <div class="flex gap-4">
-        <a href="https://www.instagram.com/rfecommunity" target="_blank" class="hover:text-yellow-300 transition">
-            <i data-lucide="instagram" class="w-5 h-5"></i>
-        </a>
-        <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v" target="_blank" class="hover:text-yellow-300 transition">
-            <i data-lucide="message-circle" class="w-5 h-5"></i>
-        </a>
-        <a href="https://github.com/rfecommunity" target="_blank" class="hover:text-yellow-300 transition">
-            <i data-lucide="github" class="w-5 h-5"></i>
-        </a>
+        <!-- Links de Contato e Redes Sociais -->
+        <div class="flex items-center justify-center gap-6 sm:gap-8 mb-8">
+            <!-- WhatsApp -->
+            <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v" target="_blank" 
+               class="text-white/90 hover:text-white transform hover:scale-110 transition-all duration-300" title="Grupo no WhatsApp">
+                <i data-lucide="message-circle" class="w-6 h-6"></i>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/rfecommunity" target="_blank" 
+               class="text-white/90 hover:text-white transform hover:scale-110 transition-all duration-300" title="Seguir no Instagram">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/rfecommunity" target="_blank" 
+               class="text-white/90 hover:text-white transform hover:scale-110 transition-all duration-300" title="Ver no GitHub">
+                <i data-lucide="github" class="w-6 h-6"></i>
+            </a>
+            <!-- E-mail -->
+            <a href="mailto:recifefrontendcommunity@gmail.com" 
+               class="text-white/90 hover:text-white transform hover:scale-110 transition-all duration-300" title="Enviar um E-mail">
+                <i data-lucide="mail" class="w-6 h-6"></i>
+            </a>
         </div>
 
-        <!-- Copyright -->
-        <p class="text-sm text-white/80">
-        &copy; 2025 RFEC - Recife Front-End Community
+        <!-- Copyright e Nome da Comunidade -->
+        <p class="text-sm text-white/60">
+            &copy; 2025 <span class="font-semibold">Recife Front-End Community</span> - RFEC
         </p>
-
     </div>
-    </footer>
+</footer>
 
     <!-- Modal de Sucesso Melhorado -->
     <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 invisible transition-opacity duration-300">
