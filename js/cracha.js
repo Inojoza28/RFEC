@@ -147,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ================================================================
     excluirFotoBtn.addEventListener('click', () => {
         resetarFoto();
-        exibirToast('<span style="color: green;">✔</span> Foto removida com sucesso.'); 
+        exibirToast('✅ Foto removida com sucesso.'); 
     });
 
     excluirQrBtn.addEventListener('click', () => {
         resetarQrCode();
-        exibirToast('<span style="color: green;">✔</span> Foto removida com sucesso.');
+        exibirToast('✅ Foto removida com sucesso.');
     });
 
     // ================================================================
