@@ -277,95 +277,133 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    async function baixarCracha(element, filename) {
-        const estavaVirado = crachaContainer.classList.contains('virado');
-        const querVerso = element.id === 'cracha-verso';
-
-        if (querVerso && !estavaVirado) {
-            crachaContainer.classList.add('virado');
-            await new Promise(r => setTimeout(r, 650));
-        } else if (!querVerso && estavaVirado) {
-            crachaContainer.classList.remove('virado');
-            await new Promise(r => setTimeout(r, 650));
+    async function waitImages(rootEl) {
+        const nodes = rootEl.querySelectorAll('img');
+        const promises = [];
+        nodes.forEach(img => {
+            if (!img.complete || img.naturalWidth === 0) {
+            promises.push(
+                new Promise(res => {
+                img.onload = img.onerror = () => res();
+                })
+            );
+            }
+        });
+        await Promise.all(promises);
         }
 
-        try {
-            // Configurações otimizadas para html2canvas
-            const canvas = await html2canvas(element, {
-                useCORS: true,
-                backgroundColor: null,
-                scale: 3, // Aumentado para melhor qualidade
-                width: element.offsetWidth,
-                height: element.offsetHeight,
-                scrollX: 0,
-                scrollY: 0,
-                allowTaint: true,
-                imageTimeout: 0,
-                logging: false,
-                onclone: (clonedDoc) => {
-                // 1) Força boa renderização das imagens no clone
-                const imgs = clonedDoc.querySelectorAll('img');
-                imgs.forEach(img => {
-                    img.style.imageRendering = '-webkit-optimize-contrast';
-                    img.style.imageRendering = 'crisp-edges';
-                });
+    async function baixarCracha(element, filename) {
+    const estavaVirado = crachaContainer.classList.contains('virado');
+    const querVerso = element.id === 'cracha-verso';
 
-                // 2) Adiciona classe "apertada" só no clone
-                const frenteClonada = clonedDoc.getElementById('cracha-frente');
-                if (frenteClonada) frenteClonada.classList.add('export-tight');
+    // Garanta que o lado certo esteja visível
+    if (querVerso && !estavaVirado) {
+        crachaContainer.classList.add('virado');
+        await new Promise(r => setTimeout(r, 650));
+    } else if (!querVerso && estavaVirado) {
+        crachaContainer.classList.remove('virado');
+        await new Promise(r => setTimeout(r, 650));
+    }
 
-                // 3) Injeta CSS que vale apenas no clone durante a exportação
-                const style = clonedDoc.createElement('style');
-                style.textContent = `
-                #cracha-frente.export-tight #foto-preview {
-                    margin-bottom: 0.75rem !important;
-                }
-                #cracha-frente.export-tight #nome-cracha {
-                    margin-top: 0 !important;
-                    line-height: 1.1 !important;
-                }
-                /* Aqui aumentamos mais a distância do nome para o "Membro Oficial" */
-                #cracha-frente.export-tight #membro-status {
-                    margin-top: 1.25rem !important; /* antes era 0.75rem */
-                }
-                #cracha-frente.export-tight #social-qr-container {
-                    margin-top: 1.5rem !important;
-                }
-                `;
-                clonedDoc.head.appendChild(style);
-                }
+    try {
+        // Aguarda fontes e imagens carregarem (evita “pulos” no mobile)
+        if (document.fonts && document.fonts.ready) {
+        try { await document.fonts.ready; } catch {}
+        }
+        await waitImages(element);
 
+        // DPR consistente (2 é boa qualidade sem pesar demais no mobile)
+        const dpr = Math.min(2, window.devicePixelRatio || 1);
+
+        const canvas = await html2canvas(element, {
+        useCORS: true,
+        backgroundColor: null,
+        scale: dpr,
+        // Ignora qualquer scroll/viewport mobile
+        scrollX: 0,
+        scrollY: 0,
+        logging: false,
+        imageTimeout: 0,
+        allowTaint: true,
+        onclone: (clonedDoc) => {
+            // 1) Renderização de imagens no clone
+            clonedDoc.querySelectorAll('img').forEach(img => {
+            img.style.imageRendering = '-webkit-optimize-contrast';
+            img.style.imageRendering = 'crisp-edges';
             });
 
-            // Cria um novo canvas com melhor compressão
-            const finalCanvas = document.createElement('canvas');
-            const ctx = finalCanvas.getContext('2d');
-            
-            finalCanvas.width = canvas.width;
-            finalCanvas.height = canvas.height;
-            
-            // Configurações para melhor qualidade
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
-            
-            // Desenha o canvas original no final
-            ctx.drawImage(canvas, 0, 0);
-            
-            const link = document.createElement('a');
-            link.href = finalCanvas.toDataURL('image/png', 1.0); // Qualidade máxima
-            link.download = filename;
-            link.click();
-            
-        } catch (error) {
-            console.error("Erro ao baixar crachá:", error);
-        } finally {
-            if (querVerso && !estavaVirado) {
-                crachaContainer.classList.remove('virado');
-            } else if (!querVerso && estavaVirado) {
-                crachaContainer.classList.add('virado');
+            // 2) Classe para ajuste fino já usado antes
+            const frenteClonada = clonedDoc.getElementById('cracha-frente');
+            if (frenteClonada) frenteClonada.classList.add('export-tight');
+
+            // 3) Neutraliza transforms/responsividade e força tamanho fixo
+            const containerClonado = clonedDoc.getElementById('cracha-container');
+            if (containerClonado) containerClonado.classList.add('export-fix');
+
+            // 4) Injeta CSS só do clone
+            const style = clonedDoc.createElement('style');
+            style.textContent = `
+            /* ===== Correção de desalinhamento mobile ===== */
+            #cracha-container.export-fix {
+                /* Força tamanho base do design */
+                width: 360px !important;
+                height: 570px !important;
+                /* Remove qualquer transform (ex.: scale-[0.85]) */
+                transform: none !important;
             }
+            /* Remove animações/efeitos que bagunçam snapshot */
+            #cracha-container.export-fix * {
+                animation: none !important;
+                transition: none !important;
+            }
+            /* Garante que frente/verso fiquem perfeitamente sobrepostos */
+            #cracha-container.export-fix #cracha-frente,
+            #cracha-container.export-fix #cracha-verso {
+                left: 0 !important; top: 0 !important;
+                width: 100% !important; height: 100% !important;
+                transform: none !important;  /* desliga rotações/3D no clone */
+                backface-visibility: visible !important;
+                perspective: none !important;
+            }
+            /* Esconde qualquer dica/UX fora do card durante export */
+            .animacao-piscar { display: none !important; }
+
+            /* ===== Seu ajuste de espaçamento na exportação ===== */
+            #cracha-frente.export-tight #foto-preview { margin-bottom: 0.75rem !important; }
+            #cracha-frente.export-tight #nome-cracha { margin-top: 0 !important; line-height: 1.1 !important; }
+            #cracha-frente.export-tight #membro-status { margin-top: 1.25rem !important; } /* mais espaço do nome */
+            #cracha-frente.export-tight #social-qr-container { margin-top: 1.5rem !important; }
+            `;
+            clonedDoc.head.appendChild(style);
+        }
+        });
+
+        // Canvas final (com smoothing ligado)
+        const finalCanvas = document.createElement('canvas');
+        finalCanvas.width = canvas.width;
+        finalCanvas.height = canvas.height;
+        const ctx = finalCanvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(canvas, 0, 0);
+
+        const link = document.createElement('a');
+        link.href = finalCanvas.toDataURL('image/png', 1.0);
+        link.download = filename;
+        link.click();
+
+    } catch (error) {
+        console.error("Erro ao baixar crachá:", error);
+    } finally {
+        // Restaura o estado de virado, se necessário
+        if (querVerso && !estavaVirado) {
+        crachaContainer.classList.remove('virado');
+        } else if (!querVerso && estavaVirado) {
+        crachaContainer.classList.add('virado');
         }
     }
+    }
+
 
     baixarFrenteBtn.addEventListener('click', () => {
         baixarCracha(crachaFrente, 'cracha-frente-rfec.png');
