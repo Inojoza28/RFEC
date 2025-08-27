@@ -59,3 +59,12 @@ html {
     width: max-content;
     animation: slide 30s linear infinite;
   }
+
+/* Ocultar barra de rolagem de forma cross-browser */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE e Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}
