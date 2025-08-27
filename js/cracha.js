@@ -23,6 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let isFrente = true; // Estado de rotação
 
+    // Função de Feedback Rápido (Toast)
+        function exibirToast(mensagem) {
+        const toast = document.getElementById('feedback-toast');
+        
+        // 1. Define a mensagem
+        toast.textContent = mensagem;
+        
+        // 2. Torna o toast visível e o move para cima
+        toast.classList.remove('opacity-0');
+        toast.style.transform = 'translate(-50%, -10px)';
+        
+        // 3. Esconde o toast após 3 segundos
+        setTimeout(() => {
+            toast.classList.add('opacity-0');
+            toast.style.transform = 'translate(-50%, 0)';
+        }, 3000); 
+    }
+
 
     // ================================================================
     // Funções para redefinir as imagens
@@ -129,10 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ================================================================
     excluirFotoBtn.addEventListener('click', () => {
         resetarFoto();
+        exibirToast("✔ Foto removida com sucesso."); 
     });
 
     excluirQrBtn.addEventListener('click', () => {
         resetarQrCode();
+        exibirToast("✔ Foto removida com sucesso."); 
     });
 
     // ================================================================
