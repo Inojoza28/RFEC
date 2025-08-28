@@ -50,14 +50,19 @@ html {
 }
 
  /*Lógica das logos de parceria*/
-  @keyframes slide {
+ @keyframes marqueeX {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    to   { transform: translateX(-40%); }
   }
-  .animate-slide {
-    display: flex;
+  .marquee-track {
     width: max-content;
-    animation: slide 30s linear infinite;
+    animation: marqueeX 28s linear infinite;
+    will-change: transform;
+  }
+
+  /* Respeita usuários com redução de movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
   }
 
 /* Ocultar barra de rolagem de forma cross-browser */
