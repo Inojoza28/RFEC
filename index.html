@@ -270,60 +270,121 @@
   </section>
 
 
-  <!-- Parceria -->
-   <section class="max-w-4xl mx-auto px-6 py-12">
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
-      
-      <!-- Header da parceria -->
-      <div class="flex items-center gap-4 mb-6">
-        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
-          <i data-lucide="graduation-cap" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
-        </div>
-        <div>
-          <h2 class="text-xl font-bold mb-1 text-gray-900 dark:text-gray-100">Parceria com a FIAP</h2>
-          <p class="text-gray-600 dark:text-gray-300 text-sm">Oportunidades exclusivas de capacitação</p>
-        </div>
+  <!-- Parcerias de Educação -->
+  <section id="parcerias-educacao" class="max-w-5xl mx-auto px-6 py-12">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+        <i data-lucide="graduation-cap" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
       </div>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Parcerias de Educação</h2>
+    </div>
 
-      <!-- Conteúdo -->
-      <div class="grid md:grid-cols-2 gap-6 items-center">
-        <div>
-          <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            Nossa parceria com a <strong>FIAP</strong> oferece <strong>bolsas de descontos</strong> 
-            em graduações e pós-graduações para membros da comunidade.
+    <!-- grid: Alura primeiro -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 justify-items-center">
+      <!-- ===== CARD ALURA (destaque visual, sem selo) ===== -->
+      <article class="relative overflow-hidden rounded-2xl border border-blue-200/70 dark:border-blue-700/50 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition w-full max-w-[560px] md:max-w-none">
+        <div class="p-6">
+          <!-- header com logo -->
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center overflow-hidden">
+              <img src="assets/imgs/parceiros/ALURA.png" alt="Alura" class="w-10 h-10 object-contain">
+            </div>
+            <div class="min-w-0">
+              <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Parceria com a Alura</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Trilhas e formações com desconto</p>
+            </div>
+          </div>
+
+          <!-- conteúdo -->
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-5">
+            Aprenda Front-end e muito mais na <strong>Alura</strong> com nosso link de <strong>desconto</strong>.
+            Ideal para acelerar sua carreira com prática guiada e projetos.
           </p>
-          
-          <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-            <i data-lucide="message-square" class="w-4 h-4"></i>
-            <span class="text-sm font-medium">
-              <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v?mode=ems_copy_c&fbclid=PAZXh0bgNhZW0CMTEAAadxkR6uWoyyEqfTaBSNlVZ7s-M97yhGO69CxmmtzEh04nbUGFnpVvWwZeX_uQ_aem_mjvXgRiFZuGq7CHoD8Q0og" target="_blank">Entre em contato com os ADMs do grupo do WhatsApp</a></span>
+
+          <!-- destaques curtos -->
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm mb-6">
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Trilhas e formações completas
+            </li>
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Projetos práticos
+            </li>
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Comunidade ativa
+            </li>
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Certificados
+            </li>
+          </ul>
+
+          <!-- CTA ÚNICO (desconto) -->
+          <a href="https://www.alura.com.br/indica-dev/larissaamca" target="_blank" rel="noopener noreferrer"
+            class="group inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold
+                    bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+            Usar desconto na Alura
+            <span class="inline-block transition-transform group-hover:translate-x-0.5">→</span>
+          </a>
+        </div>
+
+        <!-- fundo decorativo suave -->
+        <div class="pointer-events-none absolute -bottom-16 -right-16 w-56 h-56 rounded-full
+                    bg-blue-200/40 dark:bg-blue-500/20 blur-3xl"></div>
+      </article>
+
+      <!-- ===== CARD FIAP (apenas borda temática) ===== -->
+      <article class="rounded-2xl border border-rose-300/70 dark:border-rose-700/50 bg-white dark:bg-gray-800 p-6 shadow-sm hover:shadow-md transition w-full max-w-[560px] md:max-w-none">
+        <!-- header com logo -->
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-900/30 flex items-center justify-center overflow-hidden">
+            <img src="assets/imgs/parceiros/FIAP.png" alt="FIAP" class="w-10 h-10 object-contain">
+          </div>
+          <div class="min-w-0">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Parceria com a FIAP</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 truncate">Bolsas e descontos em Graduação & Pós</p>
           </div>
         </div>
 
-        <!-- Benefits compacto -->
-        <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
-          <h3 class="font-semibold mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100">
-            <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i>
-            <span class="text-sm">Benefícios</span>
-          </h3>
-          <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-            <li class="flex items-center gap-2">
-              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              Descontos em graduações
+        <!-- conteúdo -->
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-5">
+          Membros RFEC têm acesso a <strong>bolsas de desconto</strong> em cursos da <strong>FIAP</strong>.
+          Fale com a moderação para validar seu benefício.
+        </p>
+
+        <!-- benefícios compactos -->
+        <div class="bg-gray-50 dark:bg-gray-700/40 rounded-xl p-4 mb-5">
+          <h4 class="font-semibold text-sm text-gray-900 dark:text-gray-100 mb-3">Benefícios</h4>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span> Descontos em Graduação
             </li>
-            <li class="flex items-center gap-2">
-              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              Descontos em pós-graduações
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span> Descontos em Pós
             </li>
-            <li class="flex items-center gap-2">
-              <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              Suporte da comunidade
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+              <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span> Suporte da comunidade
             </li>
           </ul>
         </div>
-      </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="https://www.fiap.com.br" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold
+                    bg-gray-900 text-white dark:bg-gray-700 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500">
+            Site FIAP
+          </a>
+          <a href="https://chat.whatsapp.com/EgOZQSHnoJ423bIAvIBi2v" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold
+                    border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200
+                    hover:border-rose-500 dark:hover:border-rose-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400">
+            Falar com os ADMs (WhatsApp)
+          </a>
+        </div>
+      </article>
+
     </div>
   </section>
+
 
   <hr class="max-w-xs h-px mx-auto border-none bg-gradient-to-r from-transparent via-blue-400/60 dark:via-blue-500/50 to-transparent">
   
